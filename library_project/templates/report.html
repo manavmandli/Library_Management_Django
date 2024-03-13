@@ -1,0 +1,46 @@
+{% extends 'base.html' %} 
+{% block heading %} Report {% endblock heading %}
+{% block content %}
+<div class="flex flex-col">
+  <!-- Chart -->
+  <canvas id="myChart"></canvas>
+
+  <script>
+    // Data for chart
+    var months = [];
+    var counts = [];
+    {% for data in transaction_counts %}
+        months.push("{{ data.month }}");
+        counts.push("{{ data.count }}");
+    {% endfor %}
+
+    // Chart configuration
+    var ctx = document.getElementById('myChart').getContext('2d');
+    var myChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: months,
+            datasets: [{
+                label: 'Transactions per Month',
+                data: counts,
+                backgroundColor: 'rgba(144, 238, 144)',
+                borderColor: 'rgba(144, 238, 144)',
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true
+                    }
+                }]
+            }
+        }
+    });
+  </script>
+
+  <!-- Download report button -->
+  <button class="text-white hover:shadow-md text-xl rounded bg-blue-500 px-4 py-2 mt-8 " type="submit"><a href="?generate_report=1"> Download Report</a></button>
+</div>
+{% endblock content %}

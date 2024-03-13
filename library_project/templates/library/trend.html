@@ -1,0 +1,53 @@
+{% extends 'base.html' %} 
+{% block heading %} Trend Report {% endblock heading %}
+{% block content %}
+<div class="flex flex-col">
+  <!-- Popular Books -->
+  <h2>Popular Books</h2>
+  <div class="overflow-x-auto mb-6 mt-2">
+    <table class="table-auto border-collapse border border-gray-200">
+      <thead>
+        <tr class="bg-gray-800">
+          <th class="px-4 py-2">Book Name</th>
+          <th class="px-4 py-2">Total Issues</th>
+          <!-- Add additional headers as needed -->
+        </tr>
+      </thead>
+      <tbody>
+        {% for book in popular_books %}
+        <tr class="bg-gray-800">
+          <td class="border px-4 py-2">{{ book.book__name }}</td>
+          <td class="border px-4 py-2">{{ book.total_issues }}</td>
+          <!-- Add additional cells as needed -->
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Highest Paying Customers -->
+  <h2>Highest Paying Customers</h2>
+  <div class="overflow-x-auto mt-2">
+    <table class="table-auto border-collapse border border-gray-200">
+      <thead>
+        <tr class="bg-gray-800">
+          <th class="px-4 py-2">First Name</th>
+          <th class="px-4 py-2">Last Name</th>
+          <th class="px-4 py-2">Total Charges</th>
+          <!-- Add additional headers as needed -->
+        </tr>
+      </thead>
+      <tbody>
+        {% for customer in highest_paying_customers %}
+        <tr class="bg-gray-800">
+          <td class="border px-4 py-2">{{ customer.member__first_name }}</td>
+          <td class="border px-4 py-2">{{ customer.member__last_name }}</td>
+          <td class="border px-4 py-2">{{ customer.total_charges }}</td>
+          <!-- Add additional cells as needed -->
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+{% endblock content %}
